@@ -302,6 +302,19 @@ GROUP BY payroll_year,
  * v letech 2006-2018. U krajů, kde byly ceny potravin měřeny, a průmyslových odvětví 
  * s průměrnými mzdami se ale objevují z nějakého důvodu hodnoty NULL. Potřebuji prověřit 
  * původní data, zda je k tomu důvod. 
+ */
+SELECT *
+FROM czechia_price cp 
+WHERE cp.region_code IS NULL --7217
+;
+SELECT *
+FROM czechia_payroll cp 
+WHERE cp.industry_branch_code IS NULL --344
+;
+/* Je to tak, NULL hodnoty se skutečně objevují kvůli tomu, že už v primárních tabulkách 
+ * tyto údaje v mnoha případech chybí.
+ */
+/*
  * Dotaz je ale takto pomalý. Konzultovala jsem výsledky EXPLAIN ANALYZE s Copilotem a 
  * zdá se, že problém způsobují vnořené SELECTy a složitá agregace, 
  * podle velkého množství hodnot.
@@ -439,30 +452,6 @@ FROM t_magdalena_lorencova_project_sql_primary_final tmlpspf
 ;
 
 /*Vypadá to dobře. Můžu přejít na tvorbu pomocných materiálů.*/
-
-SELECT *
-FROM czechia_payroll cp 
-WHERE cp.industry_branch_code IS NULL --344
-	AND cp.payroll_year BETWEEN 2006 AND 2018 -- 208
-;
-
-SELECT DISTINCT cpr.category_code -- 27
-FROM czechia_price cpr
-;
-
-SELECT 208*27 -- 5616 - Proč jich jen asi mám půlku?
-;
-
-SELECT DISTINCT cp.industry_branch_code, cp.payroll_year, count (*)
-FROM czechia_payroll cp 
-WHERE cp.industry_branch_code IS NULL --344
-	AND cp.payroll_year BETWEEN 2006 AND 2018 -- 208
-GROUP BY cp.industry_branch_code, cp.payroll_year, cp.payroll_quarter
-ORDER BY cp.payroll_year asc
-;
--- 4 kvartály, 13 let, 27 kategorií potravin = 1404 řádků pro každé odvětví 
--- 20 průmyslových odvětví - jedno je NULL
--- celkem mám ve výsledné tabulce 53160 řádků, z toho 20ina je 2658
 
 
 /* 2) Vytvořit pomocnou tabulku s HDP, GINI koeficientem a populací 
@@ -664,10 +653,6 @@ FROM t_magdalena_lorencova_project_sql_secondary_final
 /*Teď mám obě dvě tabulky s jednoznačnou identifikací každého řádku 
 a můžu zkusit znovu zpracovat výzkumné otázky.*/
 
-/* ## Výzkumné otázky ##
- 1) Rostou v průběhu let mzdy ve všech odvětvích, nebo v některých klesají?
- */
-
 /* Poznámka: 
  * Ukázalo se, že doplnění PRIMARY KEY nemělo na násobení řádků ve skutečnosti žádný vliv.
  * Nicméně, tabulky budou přehlednější. 
@@ -675,7 +660,11 @@ a můžu zkusit znovu zpracovat výzkumné otázky.*/
  * také údaje o průměrných cenách potravin, které pak způsobovaly navýšení počtu řádků 
  * kvůli možným kombinacím. Tento problém vyřešilo použití příkazu SELECT DISTINCT.
  */
- 
+
+/* ## Výzkumné otázky ##
+ 1) Rostou v průběhu let mzdy ve všech odvětvích, nebo v některých klesají?
+ */
+
 SELECT DISTINCT -- Používám DISTINCT, abych odfiltrovala duplicity způsobené tím, 
 		-- že v původní tabulce jsou také průměrné ceny pro 27 kategorií jídla.
 	tmlpspf.year,
@@ -739,7 +728,7 @@ ORDER BY fi.YEAR, fi.quarter asc;
  3) Která kategorie potravin zdražuje nejpomaleji (je u ní nejnižší 
  	percentuální meziroční nárůst)? 
  */
-WITH ppd AS ( -- Nejdřív jsem si spočítala percentuální nárůsty mezi jednotlivými roky pro jednotlivé kategorie potreavin.
+WITH ppd AS ( -- Nejdřív jsem si spočítala percentuální nárůsty mezi jednotlivými roky pro jednotlivé kategorie potravin.
 SELECT 
 	fi.food,
 	fi.YEAR,
@@ -948,4 +937,4 @@ LEFT JOIN fpwg fpwg2
  * Úplný závěr: Příště si pořádně pročtu zadání všech otázek a nebudu se při vytváření podkladů trápit menšími časovými jednotkami jako jsou kvartály, 
  * pokud je při dalším zpracování nevyužiju a nebudu si zbytečně komplikovat kód.
  */
-
+ 
