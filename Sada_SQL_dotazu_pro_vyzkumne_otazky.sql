@@ -318,11 +318,6 @@ percentual_wage_difference_per_year AS (
 )
 SELECT 
     afpynf.year,
-    afpynf.avg_food_price,
-    awynb.avg_wage,
-    afpynf.prev_year,
-    afpynf.prev_year_avg_food_price,
-    awynb.prev_year_avg_wage,
     ppdy.percentual_price_difference AS percentual_food_price_difference,
     pwdy.percentual_wage_difference,
     ppdy.percentual_price_difference - pwdy.percentual_wage_difference AS percentual_price_x_wage_difference,
@@ -448,3 +443,4 @@ LEFT JOIN percentual_price_difference_per_year ppdy
     ON ppdy.year = pgr.year
 WHERE pgr.year != 2006
 ;
+
