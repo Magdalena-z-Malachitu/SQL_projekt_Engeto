@@ -6,9 +6,9 @@ k ukončení kurzu Datová akademie společnosti Engeto
 
 Projekt obsahuje:
 
-- **Tvorba Tabulek** - Výsledný SQL kód pro vytvoření tabulek s požadovanými daty
-- **Sada SQL dotazů pro výzkumné otázky** - Seznam výzkumných otázek spolu s SQL dotazy, které zobrazí relevantní data z vytvořených tabulek
-- **Průvodní listina** - popis zjištěných omezení dat, zadání projektu, použitých zdrojů a stručný popis postupu tvorby SQL kódů, odpovědi na výzkumné otázky
+- Tvorba Tabulek - Výsledný SQL kód pro vytvoření tabulek s požadovanými daty
+- Sada SQL dotazů pro výzkumné otázky - Seznam výzkumných otázek spolu s SQL dotazy, které zobrazí relevantní data z vytvořených tabulek
+- Průvodní listina - popis zjištěných omezení dat, zadání projektu, použitých zdrojů a stručný popis postupu tvorby SQL kódů, odpovědi na výzkumné otázky
 
 -------------------------------------------------------------------
 
@@ -200,97 +200,241 @@ Všechny potřebné údaje jsou dostupné v tabulce economies. Neexistuje ale je
 
 ### Výzvy
 
+1. Opakující se hodnoty 
+
+Primární tabulka obsahuje jak data o průměrných mzdách, tak data o průměrných cenách potravin za časové období, a to včetně jednotlivých odvětví a kategorií potravin. Tato data spolu nesouvisejí jinak, než právě časovým intervalem, za který jsou měřena. Docházelo proto k duplikování hodnot a nárůstu počtu řádků, který nebyl vždy zcela rovnoměrný. 
+
+Před výpočtem průměrných mezd a potravin za rok tak bylo nutné data vyčistit a získat pouze neopakující se hodnoty. K tomu jsem použila CTE clearing_values_wages a clearing_values_food.
+
+2. Zbytečně podrobná data 
+
+Primární tabulka obsahuje hodnoty mezd a průměrných cen potravin za čtvrtletí. Čtvrtletí bylo nejmenším relativně jednoduše použitelným společným časovým úsekem pro oba typy dat. 
+
+Při hledání odpovědí na výzkumné otázky se však nakonec ukázalo, že není třeba pracovat s jednotkami menšími než rok. Pro každý SQL dotaz tak byl nutný přepočet průměrných hodnot ze čtvrtletí na rok. Mimo to jsem potřebovala také zaokrouhlovat vypočtená hodnoty, aby se ve výsledných číslech nezobrazovalo zbytečně moc desetinných míst. 
+
+Přestože jsem pro přehlednost použila řetězce CTE, je výsledný kód zbytečně rozsáhlý, protože data mohla být předzpracovaná už při tvorbě primární tabulky. 
+
+Závěr: Při zpracování datových podkladů příště vezmu více v úvahu účel, ke kterému budou data používána.
+
 ---------------------------------------------------------------------------
 
 ## Odpovědi na výzkumné otázky
 
-1. Rostou v průběhu let mzdy ve všech odvětvích, nebo v některých klesají?
+**1. Rostou v průběhu let mzdy ve všech odvětvích, nebo v některých klesají?**
  
-V některých odvětvích došlo v průběhu let k poklesu mezd. Jedná se o 63 případů z 260, což je velmi výrazné množství.
- * Nejčastěji klesaly mzdy v těchto odvětvích:
- * Peněžnictví a pojišťovnictví (6x, přitom v letech 2007-2010 souvisle)
- * Administrativní a podpůrné čínnosti (5x)
- * Těžba a dobývání (5x)
- * Výroba a rozvod elektřiny (5x, v letech 2010-2015 s výjimkou roku 2012)
- * Činnosti v oblasti nemovitostí (5x, v letech 2008-2013 s výjimkou roku 2011)
- * 
- * Nejplošněji klesaly mzdy v těchno letech:
- * 2013 - v 15 otvětvích
- * 2010 - 13 odvětví 
- * 2009 - v 9 odvětvích 
- * 
- * 
- * Naopak nejmenšího počtu odvětví se pokles mezd dotkl v těchto letech: 
- * 2007 - pokles pouze v oblasti Peněžnictví a pojišťovnictví 
- * 2016-1017 - pokles pouze v oblasti Těžba a dobývání 
+V některých odvětvích došlo v průběhu let k poklesu mezd – konkrétně ve **26 případech z 240**.
 
-2. Kolik je možné si koupit litrů mléka a kilogramů chleba za první a 
- 	poslední srovnatelné období v dostupných datech cen a mezd?
+**Nejčastější pokles** mezd byl zaznamenán v těchto odvětvích:
 
-Závěr: Prvním a posledním srovnatelným obdobím jsou první kvartál roku 2006 a poslední kvartál roku 2018. 
- * 
- * V těchto obdobích bych si nejvíce chleba mohla koupit za průměrný plat prvním kvartálu roku 2006 v následujících odvětvích:
- * Peněžnictví a pojišťovnictví (3 024 kg)
- * Informační a komunikační činnosti (2 401 kg)
- * Výroba a rozvod elektřiny, plynu, tepla a klimatiz. vzduchu (1 834 kg)
- * 
- * Naopak nejméně chleba bych si mohla koupit za průměrný plat v těchto odvětvích:
- * Ubytování, stravování a pohostinství (753 kg v prvním čtvrtletí roku 2006 a 835 kg v posledním čtvrtletí roku 2018)
- * Zemědělství, lesnictví a rybářství (882 kg v prvním čtvrtletí roku 2006)
- * Administrativní a podpůrné činnosti (927 kg v prvním čtvrtletí roku 2006 a 908 kg v posledním čtvrtletí roku 2018)
- * 
- * Co se týče mléka, nejvíce bych si ho mohla koupit za průměrný plat v těchto odvětvích a obdobích: 
- * Peněžnictví a pojišťovnictví (3 106 l v prvním čtvrtletí roku 2006)
- * Informační a komunikační činnosti (2 949 l v posledním čtvrtletí roku 2018)
- * Peněžnictví a pojišťovnictví (2 751 l v posledním čtvrtletí roku 2018)
- * Výroba a rozvod elektřiny, plynu, tepla a klimatiz. vzduchu (2 539 l v posledním čtvrtletí roku 2018)
- * Informační a komunikační činnosti (2 467 l v prvním čtvrtletí roku 2006)
- * 
- * Nejméně mléka bych si ho mohla koupit za průměrný plat v těchto odvětvích a obdobích: 
- * Ubytování, stravování a pohostinství (774 l v prvním čtvrtletí roku 2006 a 1024 kg v posledním čtvrtletí roku 2018)
- * Zemědělství, lesnictví a rybářství (906 l v prvním čtvrtletí roku 2006)
- * Administrativní a podpůrné činnosti (952 l v prvním čtvrtletí roku 2006)
- * 
- * Pokud budeme uvažovat v rámci let a odhlédneme od rozdílů v platech mezi odvětvími, 
- * budeme srovnávat dostupnost potravin v letech 2006 a 2018. Za průměrný plat bych si v roce 2006
- * mohla koupit 1 313 kg chleba a 1 467 l mléka. V roce 2018 pak 1 358 kg chleba a 1670 l mléka. To je 
- * o 45 kg a 203 l mléka více. Přestože ceny potravin za toto období vzrostly (cena chleba z 16 Kč na 24 Kč 
- * a cena mléka z 14 Kč na 20 Kč), jsou ve skutečnosti potraviny v roce 2018 dostupnější než v roce 2006.
+- Těžba a dobývání (4×, v letech 2007–2010)  
+- Výroba a rozvod elektřiny, plynu, tepla a klimatiz. vzduchu (3×)  
 
-3. Která kategorie potravin zdražuje nejpomaleji (je u ní nejnižší 
- 	percentuální meziroční nárůst)?
+V ostatních odvětvích se meziroční pokles mezd projevil maximálně jedenkrát až dvakrát za sledovaného období.
 
-Závěr: 
- * V letech 2006–2018 rostly nejpomaleji ceny bílého pšeničného pečiva (v průměru 0,16 % ročně)
- * a banánů (v průměru 0,36 % ročně). Pod hranicí jednoprocentního nárůstu se udržela také 
- * vepřová pečeně (v průměru 0,79 % ročně), jablka (v průměru 0,84 % ročně) a minerální voda 
- * (v průměru 0,99 % ročně).
- * V několika kategoriích potravin došlo v tomto období dokonce k poklesu ceny - u brambor mírně
- * (v průměru 0,16 % ročně), kdežto u cukru (v průměru 3,49 % ročně) a rajských jablek 
- * (v průměru 3,78 % ročně) cena klesala poměrně výrazně. 
+**K nejplošnějšímu poklesu** mezd přitom docházel v letech **2009–13**:
 
-4. Existuje rok, ve kterém byl meziroční nárůst cen potravin výrazně vyšší 
- 	než růst mezd (větší než 10 %)?
+- 2013 – 12 odvětví
+- 2011, 2009 - 4 odvětví
+- 2010 – 3 odvětví  
 
-Závěr: Pokud uvažujeme průměrné ceny potravin (bez ohledu na kategorii) a průměrné mzdy 
- * (bez zohlednění odvětví), nerostly v žádném roce ceny potravin výrazně rychleji než mzdy 
- * (rozdíl více než o 10 %).
- * Hranici 10% rozdílu v nárůstech cen a mezd se však velmi přibližuje rok 2009 s 
- * poklesem cen potravin o 6,76 % a nárůstem mezd o 3 % (9,76 %, a tedy takřka 10 %). 
- * Zhruba poloviční rozdíl se pak projevil ještě v letech 2014, 2019 a 2017. 
- * V roce 2015 (5,87 %) byl přitom způsoben tím, že ceny potraviny poklesly (-3,31 %
- * zhruba stejně jako vzrostly mzdy (2,56 %). A tento trend pokračoval v mírnější podobě
- * i v roce 2016 (rozdíl 4,84 %), kdy došlo k mírnému poklesu cen potravin (-1,3 %) a 
- * nárůstu mezd (3,54 %). 
- * V roce 2018 pak byl rozdíl v nárůstu cen potravin a mezd způsoben tím, že platy vzrostly
- * rychleji (7,16 %) než ceny potravin (1,82 %)
- * Naopak v roce 2013 způsobil výraznější rozdíl v růstu cen potravin a mezd (6,77 %) 
- * výraznější nárůst cen potravin (5,25 %) a mírný pokles mezd (1,52 %)
- * V ostatních letech se nárůst cen mezd i potravin dosahuje rozdílů do 4 %.
+Rok **2013** byl také rokem, kdy mzdy v některých odvětvích klesaly **nejdrastičtěji**. Nejvíce poklesly mzdy v těchto odvětvích: 
 
-5.á výška HDP vliv na změny ve mzdách a cenách potravin? Neboli, 
- 	pokud HDP vzroste výrazněji v jednom roce, projeví se to na cenách 
- 	potravin či mzdách ve stejném nebo následujícím roce výraznějším růstem?
+- Peněžnictví a pojišťovnictví (z 50 800 kč na  46 317 Kč) 
+- Výroby a rozvodu elektřiny, plynu, tepla a klimatiz. vzduchu (42 657 Kč na 40 762 Kč).
+
+V ostatních letech docházelo k poklesu mezd obvykle v rámci maximálně několika stokorun. Výjimku tvoří odvětví Těžba a dobývání, kde v roce 2009 klesly mzdy takřka o 1000 Kč (z 29 273 Kč na 28 361 Kč).
+
+**Nejmenší pokles mezd** se projevil v letech:
+
+- 2014, 2016 – pouze v odvětví Těžba a dobývání  
+- 2016–2017 – pouze v odvětví  Výroba a rozvod elektřiny, plynu, tepla a klimatiz. vzduchu 
+
+V letech **2006–2008** a v roce **2012** tedy mzdy naopak **pouze rostly**. 
+
+
+
+**2. Kolik je možné si koupit litrů mléka a kilogramů chleba za první a poslední srovnatelné období v dostupných datech cen a mezd?**
+
+Prvním a posledním srovnatelným obdobím jsou **1. čtvrtletí roku 2006** a **4. čtvrtletí roku 2018**. Srovnávat čtvrtletí mi ale přijde nepraktické i vzhledem k tomu, že žádná z ostatních otázek kvartály nezohledňuje. Srovnala jsem proto hodnoty za rok 2006 a 2018. 
+
+
+| Rok  | Odvětví                                                              | Chléb (kg)  | Mléko (l) |
+|------|----------------------------------------------------------------------|-------------|-----------|
+|      | Nejvíc za průměrný plat                                              |             |           |
+|------|----------------------------------------------------------------------|-------------|-----------|
+| 2006 | Peněžnictví a pojišťovnictví                                         | 2 494       | 2 785     |
+| 2006 | Informační a komunikační činnosti                                    | 2 230       | 2 491     |
+| 2006 | Výroba a rozvod elektřiny, plynu, tepla a klimatizovaného vzduchu    | 1 820       | 2 033     |
+|------|----------------------------------------------------------------------|-------------|-----------|
+| 2018 | Informační a komunikační činnosti                                    | 2 332       | 2 868     |
+| 2018 | Peněžnictví a pojišťovnictví                                         | 2 256       | 2 775     |
+| 2018 | Výroba a rozvod elektřiny, plynu, tepla a klimatizovaného vzduchu    | 1 906       | 2 345     |
+|------|----------------------------------------------------------------------|-------------|-----------|
+|      | Nejmíň za průměrný plat                                              |             |           |
+|------|----------------------------------------------------------------------|-------------|-----------|
+| 2006 | Ubytování, stravování a pohostinství                                 | 792         | 812       |
+| 2006 | Administrativní a podpůrné činnosti                                  | 861         | 1 005     |
+| 2006 | Zemědělství, lesnictví a rybářství                                   | 924         | 1 031     |
+|------|----------------------------------------------------------------------|-------------|-----------|
+| 2018 | Ubytování, stravování a pohostinství                                 | 724         | 974       |
+| 2018 | Administrativní a podpůrné činnosti                                  | 900         | 1 059     |
+| 2018 | Ostatní činnosti                                                     | 974         | 1 198     |
+| 2018 | Zemědělství, lesnictví a rybářství                                   | 1 047       | —         |
+|------|----------------------------------------------------------------------|-------------|-----------|
+|      | **Bez ohledu na odvětví**                                            |             |           |      
+|------|----------------------------------------------------------------------|-------------|-----------|
+| 2006 |                                                                      | **1 314**   | **1 467** |
+|------|----------------------------------------------------------------------|-------------|-----------|
+| 2018 |                                                                      | **1 358**   | **1 670** |     
+
+
+Souhrnně (bez ohledu na odvětví) bych si za průměrný plat mohla v roce 2006 mohla koupit 1 313 kg chleba a 1 467 l mléka, zatímco v roce 2018 1 358 kg chleba a 1 670 l mléka. 
+
+Rozdíl: **+45 kg chleba** a **+203 l mléka**  
+
+Z toho plyne, že přestože ceny potravin vzrostly (chléb z 16 Kč na 24 Kč, mléko z 14 Kč na 20 Kč), **potraviny byly v roce 2018 reálně dostupnější než v roce 2006.**
+
+
+=======================
+
+**Nejvíce chleba** za průměrný plat v roce **2006**:
+
+- Peněžnictví a pojišťovnictví – 2 494 kg  
+- Informační a komunikační činnosti – 2 230 kg  
+- Výroba a rozvod elektřiny, plynu, tepla a klimatizovaného vzduchu – 1 820 kg  
+
+**Nejvíce chleba** za průměrný plat v roce **2018**:
+
+- Informační a komunikační činnosti – 2 332 kg 
+- Peněžnictví a pojišťovnictví – 2 256 kg  
+- Výroba a rozvod elektřiny, plynu, tepla a klimatizovaného vzduchu – 1 906 kg 
+
+**Nejméně chleba** za průměrný plat v roce **2006**:
+
+- Ubytování, stravování a pohostinství – 792 kg    
+- Administrativní a podpůrné činnosti – 861 kg
+- Zemědělství, lesnictví a rybářství – 924 kg
+
+**Nejméně chleba** za průměrný plat v roce **2018**:
+
+- Ubytování, stravování a pohostinství – 724 kg 
+- Administrativní a podpůrné činnosti – 900 kg 
+- Ostatní činnosti – 974 kg (2006) 
+- Zemědělství, lesnictví a rybářství – 1047 kg 
+
+**Nejvíce mléka** za průměrný plat v roce **2006**:
+
+- Peněžnictví a pojišťovnictví – 2 785 l  
+- Informační a komunikační činnosti – 2 491 l 
+- Výroba a rozvod elektřiny, plynu, tepla a klimatizovaného vzduchu – 2 033 l 
+
+**Nejvíce mléka** za průměrný plat v roce **2018**:
+- Informační a komunikační činnosti – 2 868 l 
+- Peněžnictví a pojišťovnictví – 2 775 l  
+- Výroba a rozvod elektřiny, plynu, tepla a klimatizovaného vzduchu – 2 345 l 
+
+**Nejméně mléka** za průměrný plat v roce **2006**:
+
+- Ubytování, stravování a pohostinství – 812 l 
+- Administrativní a podpůrné činnosti – 1005 l  
+- Zemědělství, lesnictví a rybářství – 1031 l 
+
+**Nejméně mléka** za průměrný plat v roce **2018**:
+
+- Ubytování, stravování a pohostinství – 974 l 
+- Administrativní a podpůrné činnosti – 1059 l  
+- Ostatní činnosti – 1198 l
+
+===========================================================
+
+**3. Která kategorie potravin zdražuje nejpomaleji (je u ní nejnižší percentuální meziroční nárůst)?**
+
+V letech **2006–2018** rostly nejpomaleji ceny:
+
+- Bílého pšeničného pečiva (≈ 0,16 % ročně)  
+- Banánů (≈ 0,36 % ročně)
+
+Pod hranicí 1 % nárůstu ročně zůstaly také:
+
+- Vepřová pečeně (≈ 0,79 %)  
+- Jablka (≈ 0,84 %)  
+- Minerální voda (≈ 0,99 %)  
+
+Ceny některých potravin dokonce **klesaly**:
+
+- Brambory (−0,39 % ročně, mírně)  
+- Cukr (−3,48 % ročně, výrazně)  
+- Rajčata (−3,78 % ročně, výrazně)  
+
+**4. Existuje rok, ve kterém byl meziroční nárůst cen potravin výrazně vyšší než růst mezd (větší než 10 %)?**
+
+Pokud uvažujeme průměrné ceny potravin a průměrné mzdy bez ohledu na odvětví, **v žádném roce ceny potravin nerostly o více než 10 % rychleji než mzdy.**
+
+Nejblíže k hranici 10 % měl rok **2009**, kdy:
+
+- **Ceny potravin** klesly o **−6,63 %**
+- **Mzdy** vzrostly o **2,99 %**  
+→ rozdíl **9,62 %**
+
+**Další roky s většími rozdíly:**
+
+- 2013 – rozdíl 6,66 % způsobený **nárůstem cen potravin (5,15 %)** a **poklesem mezd (−1,51 %)**
+- 2018 – rozdíl 5,23 % způsobený vysokým **nárůstem mezd (7,17 %)** oproti mnohem nižšímu **růstu cen potravin (1,94 %)**
+- 2016 – rozdíl 4,64 % způsobený **poklesem cen potravin (−1,1 %)** a **nárůstem mezd (3,54 %)**
+
+V ostatních letech se rozdíly mezi růstem mezd a cen potravin pohybují do **4 %**, většinou dokonce do 2 %.
+
+
+
+**5. Má výška HDP vliv na změny ve mzdách a cenách potravin? Neboli, pokud HDP vzroste výrazněji v jednom roce, projeví se to na cenách potravin či mzdách ve stejném nebo následujícím roce výraznějším růstem?**
+
+V některých letech se zdá, že se růst HDP projevil i na růstu mezd a cen potravin, ale **neexistuje jasná přímá vazba**. Navíc je vzorek dat příliš malý, aby se dal vyvodit jasný závěr.
+
+**Výrazný růst HDP**
+- Roky: **2007, 2015, 2017** (nad **5** %),  
+	**2018** (nad **3** %)		
+- **Mzdy**: *Častěji* také *výrazně rostou* (v roce 2007 o 6,45 % a v roce 2017 o 5,83 %, v roce 2018 o 7,17 %).  
+	Jen v roce 2015 vzrostly mzdy podstatně méně výrazně, o 2,56 %
+- **Ceny potravin** : Někdy také *výrazně rostou* (v roce 2007 o 6,1 % a v roce 2017 o 9,04 %). Jindy však klesají (v roce 2015 o −0,62 %)
+
+👉 Mzdy reagují pozitivně, ale ceny potravin ne vždy.
+
+2. Běžný růst HDP (do 3,5 %)
+- **Roky:** 2008, 2010, 2011, 2014, 2016, 2018
+- **Mzdy i ceny potravin:** většinou *normální růst* nebo *pokles*
+
+👉 Slabší HDP = slabší dynamika mezd i cen.
+
+---
+
+### 3. Negativní HDP (pokles ekonomiky)
+- **Roky:** 2009, 2012, 2013
+- **Mzdy:** většinou *normální* nebo *pokles*
+- **Ceny potravin:** překvapivě často *rostou*
+
+👉 Ceny potravin mohou růst i při poklesu HDP, což naznačuje vliv jiných faktorů (např. inflace, dovoz, sezónnost).
+
+---
+
+### ✅ Závěr
+**Výše HDP má vliv na změny mezd, ale méně spolehlivě na ceny potravin.**
+
+- Mzdy mají tendenci růst výrazněji v letech s vysokým HDP.
+- Ceny potravin jsou méně předvídatelné — mohou růst i při poklesu HDP, což naznačuje, že jsou ovlivněny širšími ekonomickými a tržními faktory.
+
+
+V některých letech se růst HDP projevil i na růstu mezd a cen potravin, ale **neexistuje jasná přímá vazba**.
+
+**Příklady:**
+
+- **2007** – HDP +5,57 % → potraviny +6,5 %, mzdy +6,88 %  
+- **2017** – HDP +5,17 % → potraviny +9,94 %, mzdy +6,21 %  
+- **2015** – HDP +5,57 %, ale potraviny **−0,62 %**, mzdy +2,63 %  
+- **2018** – HDP +3,2 %, potraviny +1,98 %, mzdy +7,71 % (největší nárůst mezd za 12 let)
+
+Z dostupných dat se zdá, že růst HDP **neovlivňuje přímo** vývoj cen potravin ani mezd. Vztah může být nepřímý a datový vzorek je příliš malý pro silné závěry.
+
+
 
 *Závěr: 
  * Zdá se, že v letech 2007 (růst o 5,57 %) a 2017 (růst o 5,17 %) došlo s výrazným nárůstem HDP také 
@@ -302,10 +446,5 @@ Závěr: Pokud uvažujeme průměrné ceny potravin (bez ohledu na kategorii) a 
  * V roce 2018 přitom došlo k nejvýraznějšímu meziročnímu nárůstu mezd za posledních 12 let. 
  * Nezdá se, že by výraznější růst HDP přímo působil na ceny potravin nebo mzdy, ale vzorek dat k analýze je příliš malý, 
  * aby bylo možno vyvodit nějaký závěr. Nezdá se ani, že by růst a pokles cen nebo mezd sledovaly stejný trend jako růst a pokles DPH.
- */
-
-/*
- * Úplný závěr: Příště si pořádně pročtu zadání všech otázek a nebudu se při vytváření podkladů trápit menšími časovými jednotkami jako jsou kvartály, 
- * pokud je při dalším zpracování nevyužiju, a nebudu si zbytečně komplikovat kód.
  */
 
