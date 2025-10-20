@@ -295,58 +295,6 @@ Rozdíl: **+45 kg chleba** a **+203 l mléka**
 Z toho plyne, že přestože ceny potravin vzrostly (chléb z 16 Kč na 24 Kč, mléko z 14 Kč na 20 Kč), **potraviny byly v roce 2018 reálně dostupnější než v roce 2006.**
 
 
-=======================
-
-**Nejvíce chleba** za průměrný plat v roce **2006**:
-
-- Peněžnictví a pojišťovnictví – 2 494 kg  
-- Informační a komunikační činnosti – 2 230 kg  
-- Výroba a rozvod elektřiny, plynu, tepla a klimatizovaného vzduchu – 1 820 kg  
-
-**Nejvíce chleba** za průměrný plat v roce **2018**:
-
-- Informační a komunikační činnosti – 2 332 kg 
-- Peněžnictví a pojišťovnictví – 2 256 kg  
-- Výroba a rozvod elektřiny, plynu, tepla a klimatizovaného vzduchu – 1 906 kg 
-
-**Nejméně chleba** za průměrný plat v roce **2006**:
-
-- Ubytování, stravování a pohostinství – 792 kg    
-- Administrativní a podpůrné činnosti – 861 kg
-- Zemědělství, lesnictví a rybářství – 924 kg
-
-**Nejméně chleba** za průměrný plat v roce **2018**:
-
-- Ubytování, stravování a pohostinství – 724 kg 
-- Administrativní a podpůrné činnosti – 900 kg 
-- Ostatní činnosti – 974 kg (2006) 
-- Zemědělství, lesnictví a rybářství – 1047 kg 
-
-**Nejvíce mléka** za průměrný plat v roce **2006**:
-
-- Peněžnictví a pojišťovnictví – 2 785 l  
-- Informační a komunikační činnosti – 2 491 l 
-- Výroba a rozvod elektřiny, plynu, tepla a klimatizovaného vzduchu – 2 033 l 
-
-**Nejvíce mléka** za průměrný plat v roce **2018**:
-- Informační a komunikační činnosti – 2 868 l 
-- Peněžnictví a pojišťovnictví – 2 775 l  
-- Výroba a rozvod elektřiny, plynu, tepla a klimatizovaného vzduchu – 2 345 l 
-
-**Nejméně mléka** za průměrný plat v roce **2006**:
-
-- Ubytování, stravování a pohostinství – 812 l 
-- Administrativní a podpůrné činnosti – 1005 l  
-- Zemědělství, lesnictví a rybářství – 1031 l 
-
-**Nejméně mléka** za průměrný plat v roce **2018**:
-
-- Ubytování, stravování a pohostinství – 974 l 
-- Administrativní a podpůrné činnosti – 1059 l  
-- Ostatní činnosti – 1198 l
-
-===========================================================
-
 **3. Která kategorie potravin zdražuje nejpomaleji (je u ní nejnižší percentuální meziroční nárůst)?**
 
 V letech **2006–2018** rostly nejpomaleji ceny:
@@ -388,63 +336,21 @@ V ostatních letech se rozdíly mezi růstem mezd a cen potravin pohybují do **
 
 **5. Má výška HDP vliv na změny ve mzdách a cenách potravin? Neboli, pokud HDP vzroste výrazněji v jednom roce, projeví se to na cenách potravin či mzdách ve stejném nebo následujícím roce výraznějším růstem?**
 
-V některých letech se zdá, že se růst HDP projevil i na růstu mezd a cen potravin, ale **neexistuje jasná přímá vazba**. Navíc je vzorek dat příliš malý, aby se dal vyvodit jasný závěr.
 
-**Výrazný růst HDP**
-- Roky: **2007, 2015, 2017** (nad **5** %),  
-	**2018** (nad **3** %)		
-- **Mzdy**: *Častěji* také *výrazně rostou* (v roce 2007 o 6,45 % a v roce 2017 o 5,83 %, v roce 2018 o 7,17 %).  
-	Jen v roce 2015 vzrostly mzdy podstatně méně výrazně, o 2,56 %
-- **Ceny potravin** : Někdy také *výrazně rostou* (v roce 2007 o 6,1 % a v roce 2017 o 9,04 %). Jindy však klesají (v roce 2015 o −0,62 %)
-
-👉 Mzdy reagují pozitivně, ale ceny potravin ne vždy.
-
-2. Běžný růst HDP (do 3,5 %)
-- **Roky:** 2008, 2010, 2011, 2014, 2016, 2018
-- **Mzdy i ceny potravin:** většinou *normální růst* nebo *pokles*
-
-👉 Slabší HDP = slabší dynamika mezd i cen.
-
----
-
-### 3. Negativní HDP (pokles ekonomiky)
-- **Roky:** 2009, 2012, 2013
-- **Mzdy:** většinou *normální* nebo *pokles*
-- **Ceny potravin:** překvapivě často *rostou*
-
-👉 Ceny potravin mohou růst i při poklesu HDP, což naznačuje vliv jiných faktorů (např. inflace, dovoz, sezónnost).
-
----
-
-### ✅ Závěr
-**Výše HDP má vliv na změny mezd, ale méně spolehlivě na ceny potravin.**
-
-- Mzdy mají tendenci růst výrazněji v letech s vysokým HDP.
-- Ceny potravin jsou méně předvídatelné — mohou růst i při poklesu HDP, což naznačuje, že jsou ovlivněny širšími ekonomickými a tržními faktory.
+| DPH kategorie            | Počet let | Mzdy  			   | Ceny   			|
+|--------------------------|-----------|------------|--------------|------------|---------------|
+| Vývoj DPH	           | Počet let | Shoda 	    | Neshoda      | Shoda      | Neshoda       |
+|--------------------------|-----------|------------|--------------|------------|---------------|
+| Výrazný růst nad 5 %     |     3     |     2      |      1       |     2      |       1       |
+| Běžný růst do 5 %        |     6     |     4      |      2       |     4      |       2       |
+| Pokles                   |     3     |     2      |      1       |     1      |       2       |
 
 
-V některých letech se růst HDP projevil i na růstu mezd a cen potravin, ale **neexistuje jasná přímá vazba**.
+Ve většině případů (celkem 9 z 12 let) se mzdy chovají v souladu s vývojem HDP.
 
-**Příklady:**
+Ceny potravin jsou méně konzistentní: v 7 z 12 let reagovaly ve shodě s HDP, v 5 letech se chovaly odlišně.
 
-- **2007** – HDP +5,57 % → potraviny +6,5 %, mzdy +6,88 %  
-- **2017** – HDP +5,17 % → potraviny +9,94 %, mzdy +6,21 %  
-- **2015** – HDP +5,57 %, ale potraviny **−0,62 %**, mzdy +2,63 %  
-- **2018** – HDP +3,2 %, potraviny +1,98 %, mzdy +7,71 % (největší nárůst mezd za 12 let)
+Z 3 let s výrazným růstem HDP odpovídaly mzdy i ceny ve 2 letech; v roce 2015 došlo k odlišnému chování (mzdy jen běžně rostly, ceny klesly).
 
-Z dostupných dat se zdá, že růst HDP **neovlivňuje přímo** vývoj cen potravin ani mezd. Vztah může být nepřímý a datový vzorek je příliš malý pro silné závěry.
-
-
-
-*Závěr: 
- * Zdá se, že v letech 2007 (růst o 5,57 %) a 2017 (růst o 5,17 %) došlo s výrazným nárůstem HDP také 
- * k výraznémů růstu cen potravin (6,5 % v roce 2007 a 9,94 % v roce 2017) 
- * i mezd (6,88 % v roce 2007 a 6,21 % v roce 2017). 
- * V letech 2015 a 2018 sice HDP výrazněji vzrostlo (5,57 % a 3,2 %), ale ceny potravin nikoliv 
- * (pokles o 0,62 % v roce 2015 a nárůst o 1,98 % v roce 2018). 
- * U mezd došlo k výraznějšímu růstu v roce 2018 (7,71 %), kdežto v roce 2015 rostly průměrné mzdy normálně (o 2,63 %)
- * V roce 2018 přitom došlo k nejvýraznějšímu meziročnímu nárůstu mezd za posledních 12 let. 
- * Nezdá se, že by výraznější růst HDP přímo působil na ceny potravin nebo mzdy, ale vzorek dat k analýze je příliš malý, 
- * aby bylo možno vyvodit nějaký závěr. Nezdá se ani, že by růst a pokles cen nebo mezd sledovaly stejný trend jako růst a pokles DPH.
- */
+Velikost vzorku je ovšem malá, proto jsou závěry orientační a ne dostačují k silnému statistickému tvrzení.
 
