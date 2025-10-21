@@ -420,7 +420,7 @@ SELECT
     pgr.year,
     pgr.percentual_GDP_raise,
     CASE 
-        WHEN pgr.percentual_GDP_raise > 3 THEN 'significant_raise'
+        WHEN pgr.percentual_GDP_raise > 5 THEN 'significant_raise'
         WHEN pgr.percentual_GDP_raise < 0 THEN 'drop'
         ELSE 'normal'
     END AS significant_GDP_raise,
@@ -443,4 +443,5 @@ LEFT JOIN percentual_price_difference_per_year ppdy
     ON ppdy.year = pgr.year
 WHERE pgr.year != 2006
 ;
+
 
