@@ -125,7 +125,7 @@ Našla jsem je v následující zdrojích v této podobě:
 
 **Výzvy:**
 
-1. Sjednocení časových údajů
+**1. Sjednocení časových údajů**
 
 Tabulka czechia_payroll obsahuje informace o průměrných mzdách v letech 2000–2021. Jako časový úcek přitom používá čtvrtletí. 
 
@@ -172,7 +172,7 @@ Dotaz jsem následně vnořila do nového dotazu, který vypočítal průměrné
 
 
 
-2. Složitost a náročnost kódu
+**2. Složitost a náročnost kódu**
 
 Abych dosáhla požadovaného výsledku, potřebovala jsem propojit data ze čtyř různých tabulek a přepočítat časové jednotky a dopočítat průměrné ceny potravin za kvartál z tabulky czechia_orice. Původně jsem se pokusila o relativně jednoduchý dotaz s vnořením několika poddotazů. To se ale ukázalo být naprosto neefektivní. Dotaz pak byl velice pomalý.
 
@@ -200,13 +200,13 @@ Všechny potřebné údaje jsou dostupné v tabulce economies. Neexistuje ale je
 
 ### Výzvy
 
-1. Opakující se hodnoty 
+**1. Opakující se hodnoty **
 
 Primární tabulka obsahuje jak data o průměrných mzdách, tak data o průměrných cenách potravin za časové období, a to včetně jednotlivých odvětví a kategorií potravin. Tato data spolu nesouvisejí jinak, než právě časovým intervalem, za který jsou měřena. Docházelo proto k duplikování hodnot a nárůstu počtu řádků, který nebyl vždy zcela rovnoměrný. 
 
 Před výpočtem průměrných mezd a potravin za rok tak bylo nutné data vyčistit a získat pouze neopakující se hodnoty. K tomu jsem použila CTE clearing_values_wages a clearing_values_food.
 
-2. Zbytečně podrobná data 
+**2. Zbytečně podrobná data **
 
 Primární tabulka obsahuje hodnoty mezd a průměrných cen potravin za čtvrtletí. Čtvrtletí bylo nejmenším relativně jednoduše použitelným společným časovým úsekem pro oba typy dat. 
 
@@ -337,20 +337,17 @@ V ostatních letech se rozdíly mezi růstem mezd a cen potravin pohybují do **
 **5. Má výška HDP vliv na změny ve mzdách a cenách potravin? Neboli, pokud HDP vzroste výrazněji v jednom roce, projeví se to na cenách potravin či mzdách ve stejném nebo následujícím roce výraznějším růstem?**
 
 
-| DPH kategorie            | Počet let | Mzdy  			   | Ceny   			|
+| DPH kategorie            | Počet let | Mzdy  	 				   | Ceny   					|
 |--------------------------|-----------|------------|--------------|------------|---------------|
-| Vývoj DPH	           | Počet let | Shoda 	    | Neshoda      | Shoda      | Neshoda       |
+| Vývoj DPH	               | Počet let | Shoda 	    | Neshoda      | Shoda      | Neshoda       |
 |--------------------------|-----------|------------|--------------|------------|---------------|
 | Výrazný růst nad 5 %     |     3     |     2      |      1       |     2      |       1       |
 | Běžný růst do 5 %        |     6     |     4      |      2       |     4      |       2       |
 | Pokles                   |     3     |     2      |      1       |     1      |       2       |
 
 
-Ve většině případů (celkem 9 z 12 let) se mzdy chovají v souladu s vývojem HDP.
+Z 3 let s výrazným růstem HDP odpovídaly mzdy i ceny ve 2 letech; v roce 2015 došlo k odlišnému chování (mzdy jen běžně rostly, ceny klesly). Ve **většině** případů (celkem 9 z 12 let) se ale **mzdy** chovají **v souladu s vývojem HDP**. **Ceny potravin** jsou **méně konzistentní**: v 7 z 12 let reagovaly ve shodě s HDP, v 5 letech se chovaly odlišně. Někdy dokonce výrazně odlišně (pokles DPH a výrazný růst cen potravin v letech 2012 a 2013).
 
-Ceny potravin jsou méně konzistentní: v 7 z 12 let reagovaly ve shodě s HDP, v 5 letech se chovaly odlišně.
 
-Z 3 let s výrazným růstem HDP odpovídaly mzdy i ceny ve 2 letech; v roce 2015 došlo k odlišnému chování (mzdy jen běžně rostly, ceny klesly).
 
-Velikost vzorku je ovšem malá, proto jsou závěry orientační a ne dostačují k silnému statistickému tvrzení.
 
