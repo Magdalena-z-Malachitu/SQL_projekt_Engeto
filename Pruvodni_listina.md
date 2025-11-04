@@ -8,7 +8,29 @@ Projekt obsahuje:
 
 - Tvorba Tabulek - Výsledný SQL kód pro vytvoření tabulek s požadovanými daty
 - Sada SQL dotazů pro výzkumné otázky - Seznam výzkumných otázek spolu s SQL dotazy, které zobrazí relevantní data z vytvořených tabulek
-- Průvodní listina - popis zjištěných omezení dat, zadání projektu, použitých zdrojů a stručný popis postupu tvorby SQL kódů, odpovědi na výzkumné otázky
+- Průvodní listina - hodnocení lektorky, popis zjištěných omezení dat, zadání projektu, použitých zdrojů a stručný popis postupu tvorby SQL kódů, odpovědi na výzkumné otázky
+
+-------------------------------------------------------------------
+
+## Hodnocení lektorky
+
+**Pozitiva**:
+- Všechny části projektu jsou zahrnuty a splňují zadání.
+- Celková struktura kódu je logická a dobře organizovaná, což napovídá o kvalitním postupu.
+- SQL skripty využívají aliasy a CTE pro lepší strukturování dotazů, což zvyšuje čitelnost a dodržení projektových požadavků.
+- Zhodnocuješ svoje postupy.
+- Velmi dobrý popis použitých dat, oceňuji posouzení kvality a filtrování nenulových hodnot.
+- Využíváš komentáře, které zlepšují orientaci v dotazech.
+- Odpovědi na výzkumné otázky máš hezky zpracované, svá tvrzení pokládáš čísly, což je super.
+  
+**Co by šlo vylepšit**:
+- Tvorba_tabulek.sql, řádek 1: Názvy sloupců ('Year', 'Quarter', 'Avg_wage') by měly používat konzistentní malá písmena.
+- Pruvodni_listina.md: u odpovědi na otázku 5 se ti nevytvořila tabulka.
+ 
+**Závěrem**:
+Díky za zapracování změn, takhle je to mnohem lepší. Projekt úspěšně splňuje základní i pokročilé požadavky zadání, přičemž využívá správné techniky a celkově se jedná o velmi dobrou práci.
+
+*Hodnotila: Sabina Šperlová*
 
 -------------------------------------------------------------------
 
@@ -347,6 +369,7 @@ V ostatních letech se rozdíly mezi růstem mezd a cen potravin pohybují do **
 
 
 Z 3 let s výrazným růstem HDP odpovídaly mzdy i ceny ve 2 letech; v roce 2015 došlo k odlišnému chování (mzdy jen běžně rostly, ceny klesly). Ve **většině** případů (celkem 9 z 12 let) se ale **mzdy** chovají **v souladu s vývojem HDP**. **Ceny potravin** jsou **méně konzistentní**: v 7 z 12 let reagovaly ve shodě s HDP, v 5 letech se chovaly odlišně. Někdy dokonce výrazně odlišně (pokles DPH a výrazný růst cen potravin v letech 2012 a 2013).
+
 
 
 
